@@ -7,36 +7,38 @@ import { MovieServiceService } from '../movie-service.service';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-  movieList: any;
-  searchText: any;
-storedArray: any;
-loader = true;
+  movielist:any;
+  searchText:any;
+storedArray:any;
+loader=true;
   constructor(private movieService: MovieServiceService) { }
 
   ngOnInit() {
-    this.movieService.getMovieList().subscribe((res: any) => {
+    console.log('component called')
+    this.movieService.getMovieList().subscribe((res:any)=>{
       res.Search.forEach(element => {
-        element.checked = false;
+        element['checked'] = false;
       });
-      this.movieList = res.Search;
+      this.movielist = res.Search;
       this.storedArray = res.Search;
-      this.loader = false;
-  });
+      this.loader =false;
+      console.log(this.movielist,'with checj list')
+  })
 }
-searchData(val) {
-  const listArray =  this.storedArray;
+searchData(val){
+  let listArray =  this.storedArray;
   if (val && val.trim() != '') {
-    this.movieList = listArray.filter((item) => {
+    this.movielist = listArray.filter((item) => {
       return (item.Title.toString().toLowerCase().indexOf(val.toString().toLowerCase()) > -1);
-    });
+    })
   } else {
-    this.movieList = this.storedArray;
+    this.movielist = this.storedArray;
   }
 }
-onChangeCheck(i) {
- const a = this.movieList.splice(i, 1);
- a[0].checked = true;
- this.movieList.push(a[0]);
+onChangeCheck(i){
+ let a = this.movielist.splice(i,1);
+ a[0]['checked'] = true;
+ this.movielist.push(a[0]);
 }
 
 }

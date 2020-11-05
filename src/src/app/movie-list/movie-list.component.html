@@ -1,13 +1,13 @@
 
 <div class="container">
-  <ng-container *ngIf="!loader; else showLoader">
+  <ng-container *ngIf="!loader; else membershipEnd">
   <div class="row">
     <div class="col-md-12">
   <h3 class="font-weight-bold">Movie List</h3>
   <input type="text" [(ngModel)]="searchText"  class="search-bar" placeholder="Search movie here..." (keyup)="searchData(searchText)">
 </div>
 </div>
-  <div class="row custom-row"  *ngFor="let movies of movieList;let i =index" [ngClass]="{ 'watched':movies.checked  }" >
+  <div class="row custom-row"  *ngFor="let movies of movielist;let i =index" [ngClass]="{ 'watched':movies.checked  }" >
 
     <div class="col-xs-3">
       <img src="{{movies.Poster}}" class="poster-image"  />
@@ -24,7 +24,7 @@
     </div>
   </div>
   </ng-container>
-  <ng-template #showLoader>
+  <ng-template #membershipEnd>
     <div class="loader"></div>
 
     </ng-template >
